@@ -1,5 +1,13 @@
 source 'https://rubygems.org'
 
+# ruby version
+ruby '2.1.3'
+
+# secure hash algorithm
+gem 'bcrypt', '~> 3.1.7'
+
+# Forms made easy!
+gem 'simple_form', '~> 3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
