@@ -1,3 +1,11 @@
+<% if signed_in? %>
+  <li><%= link_to current_user.first_name, current_user %></li>
+  <li><%= link_to "Desconectar", signout_path, method: :delete %></li>
+<% else %>
+  <li><%= link_to "Sign In", new_session_path %></li>
+<% end %>
+
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -27,7 +35,7 @@
 
 <p>
   <strong>Gender:</strong>
-  <%= @user.gender %>
+  <%= @user.gender.name %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :signed_in_user, except: [:new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -69,6 +70,11 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password_digest, :birth, :gender_id)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :birth, :gender_id)
+    end
+    
+    def signed_in_user
+      flash[:info] = "Porfavor, logue-se."
+      redirect_to new_session_path unless signed_in?
     end
 end
