@@ -1,0 +1,6 @@
+    <%= form_for(:session, url: sessions_path, html: { class: "form-horizontal pull-right" }) do |f| %>
+      <%= f.text_field :email %>
+      <%= f.password_field :password %>
+      <%= f.submit "Entrar", class: "btn btn-xs" %>
+    <% end %>
+  <p class="pull-right">Novo usuário? <%= link_to "Cadastre-se!", new_user_path %></p>
