@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, except: [:new]
+  before_action :signed_in_user, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    render layout: 'welcome'
   end
 
   # GET /users/1/edit
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Novo chief criado.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
