@@ -1,17 +1,60 @@
-<%= simple_form_for(@user, html: {class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@user, role: "form") do |f| %>
   <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :email %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
-    <%= f.input :birth %>
-    <%= f.association :gender %>
+  <h2>Torne-se um Chief <small>Mostre ao mundo o seu talento.</small></h2>
+  <hr class="colorgraph">
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <div class="form-group">
+        <%= f.input :first_name, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Nome" %>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <div class="form-group">
+        <%= f.input :last_name, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Sobrenome" %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <%= f.input :email, label: false, input_html: { class: "form-control input-lg" }, placeholder: "E-mail" %>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <div class="form-group">
+        <%= f.input :password, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Senha" %>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <div class="form-group">
+        <%= f.input :password_confirmation, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Confirme a senha" %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.input :birth, label: false, input_html: { class: "form-control" } %>
+  </div>
+  <div class="form-group">
+    <%= f.association :gender, label: "Sexo", input_html: { class: "form-control" } %>
+  </div>
+  <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3">
+      <span class="button-checkbox">
+        <button type="button" class="btn" data-color="info" tabindex="7">Eu concordo</button>
+        <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
+      </span>
+    </div>
+    <div class="col-xs-9 col-sm-9 col-md-9">
+       Clicando em <strong class="label label-primary">Registrar</strong>, você concorda com os <a href="#" data-toggle="modal" data-target="#t_and_c_m">Termos e Condições</a> configurados para este site.
+    </div>
+  </div>
+  <hr class="colorgraph">
+  <div class="row">
+    <div class="col-xs-6 col-md-6">
+      <div class="form-actions">
+        <%= f.button :submit, value: "Registrar", class: "btn btn-primary btn-block btn-lg" %>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-6">
+      <%= link_to "Logar", new_session_path, class: "btn btn-success btn-block btn-lg" %>
+    </div>
   </div>
 <% end %>
