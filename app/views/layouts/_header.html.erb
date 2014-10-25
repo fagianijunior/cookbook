@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-xs-2 col-sm-2 col-md-2">
+    <%= link_to image_tag("logo200x60.png"), root_path %>
+    <small>Seja você o chief!</small>
+  </div>
+  <div class="col-xs-6 col-sm-6 col-md-6">
+  </div>
+  <div class="col-xs-4 col-sm-4 col-md-4">
+    <% if signed_in? %>
+      <%= link_to "Sair", signout_path, method: :delete, class: "pull-right" %>
+    <% else %>
+      <%= render "sessions/welcome_new", url: sessions_path %>
+    <% end %>
+  </div>
+</div>

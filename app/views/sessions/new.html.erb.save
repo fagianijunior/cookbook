@@ -23,5 +23,5 @@
   </div>
 </div>
 <div class="row">
-  <p>Novo usuário ? <%= link_to "Sign up now!", new_user_path %></p>
+  <p>Sign in? <%= link_to "Sign up now!", new_user_path %></p>
 </div>
