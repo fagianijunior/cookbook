@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :create_date, only: [:create]
   before_action :signed_in_user, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -17,7 +16,6 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    render layout: 'welcome'
   end
 
   # GET /users/1/edit
@@ -28,9 +26,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @day = nil
-    @month = nil
-    @year = nil
 
     respond_to do |format|
       if @user.save
@@ -81,9 +76,5 @@ class UsersController < ApplicationController
     def signed_in_user
       flash[:info] = "Porfavor, logue-se."
       redirect_to new_session_path unless signed_in?
-    end
-    
-    def create_date
-      
     end
 end
