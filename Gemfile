@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # ruby version
 ruby '2.1.3'
 
+gem 'jquery-ui-rails'
+
 # secure hash algorithm
 gem 'bcrypt', '~> 3.1.7'
 
