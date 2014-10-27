@@ -4,13 +4,15 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      session[:user_id] = user.id
-      flash[:sucess] = "Usuario logado com sucesso"
-      redirect_to user
-    else
-      flash.now[:warning] = "Nome de usuario ou senha invalidos"
-      render "new"
+
+    respond_to do |format|
+      if user && user.authenticate(params[:session][:password])
+        session[:user_id] = user.id
+        format.html { redirect_to user }
+      else
+        flash.now[:warning] = "<h4>Ops!</h4>Email ou senha inválidos."
+        format.html {render :new}
+      end
     end
   end
 

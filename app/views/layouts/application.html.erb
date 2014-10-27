@@ -8,8 +8,26 @@
 </head>
 <body>
   <div class="container">
-    <%= render "layouts/header" %>
-    <%= yield %>
+    <div class="row">
+      <div class="col-md-12 column">
+        <%= render "layouts/header" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 column">
+        <% flash.each do |type, message| %>
+		  <div class="alert <%= "alert-#{type}" %> alert-dismissable fade in">
+		    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			<%= message.html_safe %><br>
+		  </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 column">
+        <%= yield %>
+      </div>
+    </div>
   </div>
 </body>
 </html>
