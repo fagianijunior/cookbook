@@ -6,6 +6,9 @@ ruby '2.1.3'
 # Upload files in your Ruby applications
 gem 'carrierwave', '~> 0.10.0'
 
+# Image manipulation
+gem 'rmagick', '~> 2.13.3'
+
 # secure hash algorithm
 gem 'bcrypt', '~> 3.1.7'
 
