@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20141014022547) do
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "avatar"
     t.string   "email"
     t.string   "password_digest"
     t.date     "birth"

@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
+
+  mount_uploader :avatar, AvatarUploader
+
   belongs_to :gender
-  
+
   before_save { self.email = email.downcase }
   
   validates :first_name, presence: true
@@ -14,5 +17,4 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
  
   has_secure_password
-
 end

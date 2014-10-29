@@ -29,7 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_path, notice: 'Novo chief criado.' }
+        flash[:info] = "Novo chief criado."
+        format.html { redirect_to root_path }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -74,7 +75,6 @@ class UsersController < ApplicationController
     end
     
     def signed_in_user
-      flash[:info] = "Porfavor, logue-se."
       redirect_to new_session_path unless signed_in?
     end
 end
