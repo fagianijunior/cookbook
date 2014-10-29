@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # ruby version
 ruby '2.1.3'
 
+# internacinalização
+gem 'rails-i18n', '~> 4.0.0'
+
 # Upload files in your Ruby applications
 gem 'carrierwave', '~> 0.10.0'
 
