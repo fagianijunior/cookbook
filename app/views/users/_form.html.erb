@@ -49,7 +49,8 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
-        <%= f.input :birth, label: false, input_html: { class: "form-control" } %>
+        <%= f.input :birth, as: :string , label: false, input_html: { class: "form-control datepicker" } %>
+
       </div>
     </div>
   </div>
@@ -83,3 +84,16 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  # quando coloco no Users.js.coffe não funciona quando acesso a página pelo link
+  # Corrigir
+  # datapicket bootstrap
+  $('.datepicker').datepicker({
+    format: "dd/mm/yyyy",
+    startDate: "01/01/1864",
+    startView: 2,
+    language: "pt-BR",
+    autoclose: true
+  });
+</script>

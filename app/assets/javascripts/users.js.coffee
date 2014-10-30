@@ -3,10 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-
-  # ------------------------------------------------------
   # pretty-fy the upload field
-  # ------------------------------------------------------
   $realInputField = $('#user_avatar')
 
   # drop just the filename in the display field
