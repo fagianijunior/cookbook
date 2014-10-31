@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, except: [:new, :create]
+  before_action :not_signed_in_user, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -77,4 +78,9 @@ class UsersController < ApplicationController
     def signed_in_user
       redirect_to new_session_path unless signed_in?
     end
+    
+    def not_signed_in_user
+      redirect_to home_index_path if signed_in?
+    end
+    
 end

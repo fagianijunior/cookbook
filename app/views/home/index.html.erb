@@ -5,7 +5,6 @@
       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
         <li role="presentation">
           <a role="menuitem" tabindex="-1" href="#">
-            <%= image_tag("pratos/prato1.jpg", class: "img-circle", size: "16x16") %>
             Action
           </a>
         </li>
@@ -15,5 +14,14 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
       </ul>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <%= form_tag("/search", method: "get") do %>
+      <%= label_tag(:q, "Search for:") %>
+      <%= text_field_tag(:q) %>
+      <%= submit_tag("Search") %>
+    <% end %>
   </div>
 </div>
