@@ -10,7 +10,11 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12">
-        <%= render "layouts/header" %>
+        <% if signed_in? %>
+          <%= render "layouts/logged_in_header" %>
+        <% else %>
+          <%= render "layouts/logged_out_header" %>
+        <% end %>
       </div>
     </div>
     <div class="row">

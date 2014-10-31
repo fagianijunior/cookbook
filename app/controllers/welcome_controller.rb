@@ -5,6 +5,6 @@ class WelcomeController < ApplicationController
   
   private
     def signed_in_user
-      redirect_to users_path unless !signed_in?
+      redirect_to home_index_path unless !signed_in?
     end
 end
