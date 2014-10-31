@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  get 'search/index'
 
-  get 'welcome/index'
-
+  resources :home
+  
   resources :users
 
   resources :sessions, only: [:new, :create, :destroy]
+  
+  resources :search
 
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
