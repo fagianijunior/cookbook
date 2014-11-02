@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        UserMailer.welcome_email(@user).deliver
         flash[:info] = "Novo chief criado."
         format.html { redirect_to root_path }
         format.json { render :show, status: :created, location: @user }
@@ -72,9 +73,9 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :birth, :gender_id)
+      params.require(:user).permit(:first_name, :last_name, :avatar, :email, :password, :password_confirmation, :birth, :gender_id)
     end
-    
+
     def signed_in_user
       redirect_to new_session_path unless signed_in?
     end
