@@ -89,11 +89,24 @@
   // quando coloco no Users.js.coffe não funciona quando acesso a página pelo link
   // Corrigir
   // datapicket bootstrap
-    $('.datepicker').datepicker({
-      format: "dd/mm/yyyy",
-      startDate: "01/01/1864",
-      startView: 2,
-      language: "pt-BR",
-      autoclose: true
-    });
+  $('.datepicker').datepicker({
+    format: "dd/mm/yyyy",
+    startDate: "01/01/1864",
+    startView: 2,
+    language: "pt-BR",
+    autoclose: true
+  });
+  
+  $(document).ready(function() {
+  var $realInputField;
+  $realInputField = $('#user_avatar');
+  $realInputField.change(function() {
+    return $('#file-display').val($(this).val().replace(/^.*[\\\/]/, ''));
+  });
+  return $('#upload-btn').click(function() {
+    return $realInputField.click();
+  });
+});
+
+  
 </script>
