@@ -7,11 +7,16 @@ class SessionsController < ApplicationController
 
     respond_to do |format|
       if user && user.authenticate(params[:session][:password])
-        session[:user_id] = user.id
-        format.html { redirect_to home_index_path }
+        if user.email_confirmed?
+          session[:user_id] = user.id
+          format.html { redirect_to home_index_path }
+        else
+          flash.now[:danger] = 'Email não confirmado,<br />Verifique seu e-mail.'
+          format.html {render :new}
+        end
       else
         flash.now[:danger] = "<h4>Ops!</h4>Email ou senha inválido."
-        format.html {render :new}
+        format.html {redirect_to '/signin'}
       end
     end
   end

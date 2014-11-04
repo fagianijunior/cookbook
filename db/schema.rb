@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20141014022547) do
     t.string   "password_digest"
     t.date     "birth"
     t.integer  "gender_id"
+    t.boolean  "email_confirmed"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h5>Ola <%= "#{@user.first_name} #{@user.last_name}" %>, </h5>
+    <p>
+      Bem vindo ao Cookbook!
+    </p>
+    <p>
+      Cadastro realizado com sucesso.<br />
+      O seu nome de usuário é: <%= @user.email %><br />
+      Clique <%= link_to 'aqui', account_confirmation_url(token: @user.password_reset_token) %> para confirmar o seu email.
+    </p>
+    <br /><br />
+    <p>
+      A equipe Cookbook agredece o seu cadastro.
+    </p>
+  </body>
+</html>

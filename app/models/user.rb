@@ -16,4 +16,10 @@ class User < ActiveRecord::Base
   #validates :password, length: { minimum: 6 }
   
   has_secure_password
+  
+  def send_confirmation
+    self.update_column(:password_reset_token, SecureRandom.urlsafe_base64)
+    self.update_column(:password_reset_sent_at, Time.zone.now)
+    UserMailer.send_confirmation_mail(self).deliver
+  end
 end
