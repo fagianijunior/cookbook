@@ -6,7 +6,7 @@
   <body>
     <h5>Ola <%= "#{@user.first_name} #{@user.last_name}" %>, </h5>
     <p>
-      Bem vindo ao <%= image_tag("#{ENV['COOKBOOK_HOST']}logo200x60.png") %>
+      Bem vindo ao <%= image_tag("#{ENV['COOKBOOK_HOST']}/assets/logo200x60.png") %>
     </p>
     <p>
       Cadastro realizado com sucesso.<br />
@@ -15,7 +15,7 @@
     </p>
     <br /><br />
     <p>
-      A equipe <%= image_tag("#{ENV['COOKBOOK_HOST']}logo200x60.png") %> agredece o seu cadastro.
+      A equipe <%= image_tag("#{ENV['COOKBOOK_HOST']}/assets/logo200x60.png") %> agredece o seu cadastro.
     </p>
   </body>
 </html>
