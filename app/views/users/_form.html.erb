@@ -17,13 +17,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
-        <%= f.input :avatar, label: false, input_html: { class: "sr-only" } %>
-        <div class="input-group">
-          <input type="text" class="form-control input-lg" id="file-display" readonly="readonly" placeholder="Foto">
-          <span class="input-group-btn">
-            <button id="upload-btn" class="btn btn-lg" type="button">Go!</button>
-          </span>
-        </div>
+        <%= f.input :avatar, label: "Foto" %>
       </div>
     </div>
   </div>
@@ -49,7 +43,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
-        <%= f.input :birth, as: :string, label: false, input_html: { class: "form-control input-lg datepicker" }, placeholder: "Data de nascimento" %>
+        <%= f.datepicker :birth, as: :string, label: false, input_html: { class: "form-control input-lg datepicker" }, placeholder: "Data de nascimento" %>
       </div>
     </div>
   </div>
@@ -95,17 +89,5 @@
     language: "pt-BR",
     autoclose: true
   });
-  
-  $(document).ready(function() {
-  var $realInputField;
-  $realInputField = $('#user_avatar');
-  $realInputField.change(function() {
-    return $('#file-display').val($(this).val().replace(/^.*[\\\/]/, ''));
-  });
-  return $('#upload-btn').click(function() {
-    return $realInputField.click();
-  });
 });
-
-  
 </script>
