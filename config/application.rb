@@ -21,6 +21,9 @@ module Cookbook
     config.i18n.default_locale = 'pt-BR'
 
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    
+    # Include the authenticity token in remote forms.
+    config.action_view.embed_authenticity_token_in_remote_forms = true
 
   end
 end

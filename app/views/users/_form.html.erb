@@ -36,7 +36,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6">
       <div class="form-group">
-        <%= f.input :birth, as: :date, label: "Data de nascimento", input_html: { class: "form-inline input-lg" } %>
+        <%= f.input :birth, as: :date, label: "Data de nascimento", start_year: Date.today.year - 90, end_year: Date.today.year, input_html: { class: "form-inline input-lg" } %>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6">

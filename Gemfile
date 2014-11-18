@@ -3,7 +3,9 @@ source 'https://rubygems.org'
 # ruby version
 ruby '2.1.3'
 
-gem 'bootstrap-datepicker-rails'
+# Paginator
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 # internacinalização
 gem 'rails-i18n', '~> 4.0.0'
