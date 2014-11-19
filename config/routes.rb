@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   get 'search/index'
-
+  
+  get 'users/send_email'
+  post 'users/send_email'
+  
+  get 'users/changed_password'
+  
+  post 'users/changed_password'
+  get 'users/confirmation_send_mail'
+  
   resources :home
   
   resources :users
@@ -13,7 +21,7 @@ Rails.application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: 'delete'
   
   get 'account_confirmation', to: 'users#account_confirmation'
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

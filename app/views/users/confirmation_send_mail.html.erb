@@ -1,0 +1,10 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Email para alteração de senha enviado.</p>
+    Clique <%= link_to 'aqui', account_confirmation_url(token: @user.password_reset_token) %>
+    para alterar sua senha.
+  </body>
+</html>

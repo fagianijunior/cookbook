@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
@@ -22,4 +23,11 @@ class User < ActiveRecord::Base
     self.update_column(:password_reset_sent_at, Time.zone.now)
     UserMailer.send_confirmation_mail(self).deliver
   end
+  
+  def send_alteration_password
+    self.update_column(:password_reset_token, SecureRandom.urlsafe_base64)
+    self.update_column(:password_reset_sent_at, Time.zone.now)
+    UserMailer.send_alteration_password_mail(self).deliver
+  end
+  
 end

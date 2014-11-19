@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, except: [:new, :create, :account_confirmation]
+  before_action :signed_in_user, except: [:new, :edit, :create, :account_confirmation, :send_email, :confirmation_send_mail]
   before_action :not_signed_in_user, only: [:new, :create, :account_confirmation]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -23,12 +23,25 @@ class UsersController < ApplicationController
   def edit
   end
   
+  # POST
+  def send_email
+    if(request.post?)
+      @user = User.find_by(email: params[:user][:email])
+      current_user = @user
+      @user.send_alteration_password
+    end
+  end
+  
+  # GET  
   def account_confirmation
     @user = User.find_by_password_reset_token(params[:token])
-    if(@user)
+    current_user = @user
+    if(!@user.email_confirmed)
       @user.update_column(:email_confirmed, true)
       @user.update_column(:password_reset_token, nil)
       redirect_to signin_path, notice: "E-mail confirmado com sucesso!"
+    elsif(@user.email_confirmed)
+      redirect_to edit_user_path @user.id
     else
       redirect_to signin_path, notice: "Email não pode ser confirmado."
     end
