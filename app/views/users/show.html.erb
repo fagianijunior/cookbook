@@ -28,7 +28,9 @@
       </div>
       <div class="box-content row">
         <div class="col-md-12">
-          <%= render 'shared/stats' %>
+          <section class="stats">
+            <%= render 'shared/stats' %>
+          </section>
         </div>
         <% @user.following.each do |following| %>
           <div class="col-sm-3 col-md-6">
@@ -44,6 +46,7 @@
     </div>
   </div>
 </div>
+<%= render 'follow_form' if logged_in? %>
 
 <script>
 $(document).ready(function () {
@@ -66,5 +69,3 @@ $(document).ready(function () {
   });
 });
 </script>
-<%= render 'follow_form' if logged_in? %>
-<%= link_to 'Back', users_path %>

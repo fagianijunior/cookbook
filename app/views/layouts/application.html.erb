@@ -30,7 +30,6 @@
       <%= link_to image_tag("logo225x80.png", alt: "Cookbook", class: "hidden-xs", width: "170"), root_path %>
       <% if logged_in? %>
         <%= render "layouts/menu_logged" %>
-        <%= render 'layouts/stats' %>
       <% else %>
         <%= render "sessions/welcome_new" %>
       <% end %>
