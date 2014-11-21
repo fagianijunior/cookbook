@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, except: [:new, :edit, :create, :account_confirmation, :change_password_email, :confirmation_send_mail]
-  before_action :not_signed_in_user, only: [:new, :create, :account_confirmation]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only:    [:new, :edit, :create, :account_confirmation, :change_password_email, :confirmation_send_mail]
+  before_action :correct_user,   only:    [:edit, :update]
+  before_action :set_user, only:          [:edit, :update, :show, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:search].nil?
+      @users = User.paginate(page: params[:page])
+    else
+      @users = User.where("lower(first_name) like ? or lower(last_name) like ?", "%#{params[:search][:q].downcase}%", "%#{params[:search][:q].downcase}%").paginate(page: params[:page])
+    end
   end
 
   # GET /users/1
@@ -16,7 +20,11 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    if logged_in?
+      redirect_to current_user
+    else
+      @user = User.new
+    end
   end
 
   # GET /users/1/edit
@@ -42,8 +50,33 @@ class UsersController < ApplicationController
       elsif(@user.email_confirmed)
         redirect_to edit_user_path @user.id
       end    
+    end
+  end
+  
+  def following
+    @title = "Seguindo"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Me seguem"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+  
+  def account_confirmation
+    @user = User.find_by_password_reset_token(params[:token])
+    if(@user)
+      @user.update_column(:email_confirmed, true)
+      @user.update_column(:password_reset_token, nil)
+      flash.now[:seccess] = "<h4>E-mail confirmado com sucesso!</h4>Realize o login."
+      redirect_to login_path
     else
-      redirect_to signin_path, notice: "Email não pode ser confirmado."
+      flash.now[:success] = "Email não pode ser confirmado."
+      redirect_to login_path
     end
   end
 
@@ -51,25 +84,26 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    
+
     respond_to do |format|
-    if(@user.save)
-      @user.send_confirmation
-      flash[:info] = "Novo chief criado."
-      format.html { redirect_to root_path }
-    else 
-      format.html { render :new }
-    end  
+      if @user.save
+        @user.send_confirmation
+        flash.now[:success] = "<h4>Novo chief criado.</h4>Um email de confirmação foi enviado para: #{@user.email}."
+        redirect_to root_path
+      else
+        render :new
+      end
+    end
   end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @user.update(user_params)
+      flash[:success] = "Dados do chief atualizados com sucesso!"
+      redirect_to @user
+    else
+      render :edit
     end
   end
 
@@ -77,9 +111,8 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-    end
+    flash[:success] = "Chief removido com sucesso!"
+    redirect_to users_url
   end
 
   private
@@ -93,12 +126,15 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :avatar, :email, :password, :password_confirmation, :birth, :gender_id)
     end
 
-    def signed_in_user
-      redirect_to signin_path unless signed_in?
-    end
-    
-    def not_signed_in_user
-      redirect_to home_index_path if signed_in?
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Por favor loge-se."
+        redirect_to login_url
+      end
     end
 
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
 end

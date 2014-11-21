@@ -7,47 +7,29 @@
     <%= csrf_meta_tags %>
   </head>
 <body>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>Settings</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Here settings can be configured...</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-                </div>
-            </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h3>Settings</h3>
         </div>
+        <div class="modal-body">
+          <p>Here settings can be configured...</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+          <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+        </div>
+      </div>
     </div>
-
+  </div>
   <!-- topbar starts -->
-  <div class="navbar navbar-default" role="navigation">
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <%= link_to image_tag("logo225x80.png", alt: "Cookbook", class: "hidden-xs", width: "170"), root_path %>
-      <% if signed_in? %>
-
-        <!-- user dropdown starts -->
-        <div class="btn-group pull-right">
-          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"><%= "#{current_user.first_name} #{current_user.last_name}" %></span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Profile</a></li>
-            <li class="divider"></li>
-            <li>
-              <%= link_to "Sair", signout_path, method: :delete %>
-            </li>
-          </ul>
-        </div>
-        <!-- user dropdown ends -->
-        <%= image_tag(current_user.avatar, class: "img-circle pull-right", size: "50x50") %>
+      <% if logged_in? %>
+        <%= render "layouts/menu_logged" %>
       <% else %>
         <%= render "sessions/welcome_new" %>
       <% end %>
@@ -65,8 +47,8 @@
     </noscript>
 
     <div id="content" class="col-lg-12 col-sm-12">
+    <br><br><br><br><br>
       <!-- content starts -->
-      
       <!-- flash notification starts -->
       <div class="row">
         <div class="col-lg-12 col-sm-12">
@@ -74,10 +56,10 @@
         </div>
       </div>
       <!-- flash notification ends -->
-      
       <div class="row">
         <div class="col-lg-12 col-sm-12">
           <%= yield %>
+          <%= debug(params) if Rails.env.development? %>
         </div>
       </div>
     </div>
