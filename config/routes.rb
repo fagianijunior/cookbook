@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
   get 'search/index'
   
-  get 'users/send_email'
-  post 'users/send_email'
+  get 'users/change_password_email'
+  post 'users/change_password_email'
   
-  get 'users/changed_password'
-  
-  post 'users/changed_password'
   get 'users/confirmation_send_mail'
   
   resources :home

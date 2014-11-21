@@ -5,6 +5,8 @@ ruby '2.1.3'
 
 gem 'bootstrap-datepicker-rails'
 
+gem "password_strength"
+
 # internacinalização
 gem 'rails-i18n', '~> 4.0.0'
 

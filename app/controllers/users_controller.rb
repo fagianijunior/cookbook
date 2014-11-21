@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, except: [:new, :edit, :create, :account_confirmation, :send_email, :confirmation_send_mail]
+  before_action :signed_in_user, except: [:new, :edit, :create, :account_confirmation, :change_password_email, :confirmation_send_mail]
   before_action :not_signed_in_user, only: [:new, :create, :account_confirmation]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -24,24 +24,24 @@ class UsersController < ApplicationController
   end
   
   # POST
-  def send_email
+  def change_password_email
     if(request.post?)
       @user = User.find_by(email: params[:user][:email])
-      current_user = @user
-      @user.send_alteration_password
+      @user.send_change_password
     end
   end
   
   # GET  
   def account_confirmation
     @user = User.find_by_password_reset_token(params[:token])
-    current_user = @user
-    if(!@user.email_confirmed)
-      @user.update_column(:email_confirmed, true)
-      @user.update_column(:password_reset_token, nil)
-      redirect_to signin_path, notice: "E-mail confirmado com sucesso!"
-    elsif(@user.email_confirmed)
-      redirect_to edit_user_path @user.id
+    if(@user)
+      if(!@user.email_confirmed)
+        @user.update_column(:email_confirmed, true)
+        @user.update_column(:password_reset_token, nil)
+        redirect_to signin_path, notice: "E-mail confirmado com sucesso!"
+      elsif(@user.email_confirmed)
+        redirect_to edit_user_path @user.id
+      end    
     else
       redirect_to signin_path, notice: "Email não pode ser confirmado."
     end
@@ -51,18 +51,16 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    
     respond_to do |format|
-      if @user.save
-        @user.send_confirmation
-        flash[:info] = "Novo chief criado."
-        format.html { redirect_to root_path }
-      else
-        format.html { render :new }
-      end
-    end
+    if(@user.save)
+      @user.send_confirmation
+      flash[:info] = "Novo chief criado."
+      format.html { redirect_to root_path }
+    else 
+      format.html { render :new }
+    end  
   end
-
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
@@ -102,5 +100,5 @@ class UsersController < ApplicationController
     def not_signed_in_user
       redirect_to home_index_path if signed_in?
     end
-    
+
 end

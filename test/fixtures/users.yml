@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  password_digest: MyString
+  first_name: marcelo
+  last_name: aguiar
+  email: masasp@hotmail.com
+  password_digest: 123
   birth: 2014-10-14
-  gender_id: 
+  gender_id: 1
 
 two:
   first_name: MyString
