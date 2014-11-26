@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:    [:new, :edit, :create, :account_confirmation, :change_password_email, :confirmation_send_mail]
+  before_action :logged_in_user, only:    [:new, :create, :account_confirmation, :change_password_email, :confirmation_send_mail]
   before_action :correct_user,   only:    [:edit, :update]
   before_action :set_user, only:          [:edit, :update, :show, :destroy]
 
@@ -48,6 +48,7 @@ class UsersController < ApplicationController
         @user.update_column(:password_reset_token, nil)
         redirect_to signin_path, notice: "E-mail confirmado com sucesso!"
       elsif(@user.email_confirmed)
+        current_user = @user
         redirect_to edit_user_path @user.id
       end    
     end
