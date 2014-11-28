@@ -2,67 +2,60 @@
 <html>
   <head>
     <title>Cookbook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rede social para quem gosta de culinário.">
+    <meta name="author" content="Carlos Fagiani Junior">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
 <body>
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
-          <h3>Settings</h3>
-        </div>
-        <div class="modal-body">
-          <p>Here settings can be configured...</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-          <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- topbar starts -->
-  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="navbar-inner">
-      <%= link_to image_tag("logo225x80.png", alt: "Cookbook", class: "hidden-xs", width: "170"), root_path %>
-      <% if logged_in? %>
-        <%= render "layouts/menu_logged" %>
-      <% else %>
-        <%= render "sessions/welcome_new" %>
-      <% end %>
-    </div>
-  </div>
-  <!-- topbar ends -->
 
-  <div class="ch-container">
-    <noscript>
-      <div class="alert alert-block col-md-12">
-        <h4 class="alert-heading">Warning!</h4>
-        <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
-          enabled to use this site.</p>
-      </div>
-    </noscript>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+  	  <%= link_to image_tag("logo.png", alt: "Cookbook", width: "115"), root_path, class: "navbar-brand" %>
+		</div>
+		<% if logged_in? %>
+      <%= render "layouts/header_logged" %>
+    <% else %>
+      <%= render "sessions/welcome_new" %>
+    <% end %>
+	</nav>
 
-    <div id="content" class="col-lg-12 col-sm-12">
-    <br><br><br><br><br>
-      <!-- content starts -->
-      <!-- flash notification starts -->
-      <div class="row">
-        <div class="col-lg-12 col-sm-12">
-          <%= render "layouts/flash" %>
-        </div>
-      </div>
-      <!-- flash notification ends -->
-      <div class="row">
-        <div class="col-lg-12 col-sm-12">
-          <%= yield %>
-          <%= debug(params) if Rails.env.development? %>
-        </div>
-      </div>
+  <div class="row">
+    <div class="col-xs-12 col-mg-12 col-sm-12 col-lg-12">
+      <%= render "layouts/flash" %>
+    </div>
+    <div class="col-xs-12 col-mg-12 col-sm-12 col-lg-12">
+      <%= yield %>
+      <%= debug(params) if Rails.env.development? %>
     </div>
   </div>
+
+  <script>
+    $(".btn-close").click(function(e) {
+        e.preventDefault();
+        $(this).parent().parent().parent().fadeOut();
+    });
+    
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    
+    
+    $('textarea.expand').focus(function () {
+      $(this).animate({ height: "200px" }, 500);
+      $('.btn-post').show(500);
+    });
+
+    $('textarea.expand').focusout(function () {
+      if ($(this).val().length > 0) { } else {
+        $(this).animate({ height: "25px" }, 500);
+        $('.btn-post').hide(500);
+      }
+    });
+  </script>
+  
 </body>
 </html>

@@ -1,5 +1,5 @@
 <div class="media well">
-  <%= display_small_avatar(user, "pull-left") %>
+  <%= image_tag display_small_avatar(user), class: "pull-left" %>
   <div class="media-body">
     <h4 class="media-heading">
       <%= link_to "#{user.first_name} #{user.last_name}", user %>

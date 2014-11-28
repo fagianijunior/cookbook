@@ -1,0 +1,19 @@
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand">
+      <%= link_to truncate("#{current_user.first_name} #{current_user.last_name}", length: 20), current_user %>
+    </li>
+    <li>
+      <%= link_to "Home", current_user %>
+    </li>
+    <li>
+      <%= link_to "Meu Cookbook", "#" %>
+    </li>
+    <li>
+      <%= link_to "Encontrar Chiefs", users_path %>
+    </li>
+    <li>
+      <%= link_to "Sair", logout_path, method: :delete %>
+    </li>
+  </ul>
+</div>
