@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:    [:edit, :update, :index, :show]
+  before_action :logged_in_user, only:    [:new, :create, :account_confirmation, :change_password_email, :confirmation_send_mail]
   before_action :correct_user,   only:    [:edit, :update]
   before_action :set_user, only:          [:edit, :update, :show, :destroy]
 
@@ -29,6 +29,29 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+  
+  # POST
+  def change_password_email
+    if(request.post?)
+      @user = User.find_by(email: params[:user][:email])
+      @user.send_change_password
+    end
+  end
+  
+  # GET  
+  def account_confirmation
+    @user = User.find_by_password_reset_token(params[:token])
+    if(@user)
+      if(!@user.email_confirmed)
+        @user.update_column(:email_confirmed, true)
+        @user.update_column(:password_reset_token, nil)
+        redirect_to signin_path, notice: "E-mail confirmado com sucesso!"
+      elsif(@user.email_confirmed)
+        current_user = @user
+        redirect_to edit_user_path @user.id
+      end    
+    end
   end
   
   def following
@@ -62,12 +85,15 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    if @user.save
-      @user.send_confirmation
-      flash.now[:success] = "<h4>Novo chief criado.</h4>Um email de confirmação foi enviado para: #{@user.email}."
-      redirect_to root_path
-    else
-      render :new
+
+    respond_to do |format|
+      if @user.save
+        @user.send_confirmation
+        flash.now[:success] = "<h4>Novo chief criado.</h4>Um email de confirmação foi enviado para: #{@user.email}."
+        redirect_to root_path
+      else
+        render :new
+      end
     end
   end
 
@@ -103,7 +129,7 @@ class UsersController < ApplicationController
 
     def logged_in_user
       unless logged_in?
-        flash[:danger] = "Porfavor loge-se."
+        flash[:danger] = "Por favor loge-se."
         redirect_to login_url
       end
     end

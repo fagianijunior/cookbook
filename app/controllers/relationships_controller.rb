@@ -22,7 +22,7 @@ class RelationshipsController < ApplicationController
   private
     def logged_in_user
       unless logged_in?
-        flash[:danger] = "Porfavor loge-se."
+        flash[:danger] = "Por favor loge-se."
         redirect_to login_url
       end
     end

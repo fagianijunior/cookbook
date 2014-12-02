@@ -4,6 +4,12 @@ class UserMailer < ActionMailer::Base
   def send_confirmation_mail(user)
     @user = user
     
-    mail(to: @user.email, subject: 'Bem vindo ao Cookbook')
+    mail(to: @user.email, subject: "Bem vindo ao Cookbook")
+  end
+  
+  def send_change_password_mail(user)
+    @user = user
+    
+    mail(to: @user.email, subject: "Alteração da senha do Cookbook")
   end
 end

@@ -7,6 +7,8 @@ ruby '2.1.3'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
+gem "password_strength"
+
 # internacinalização
 gem 'rails-i18n', '~> 4.0.0'
 
