@@ -16,8 +16,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @post = Post.new
+    #@posts = feed(current_user)
+    #@posts = Post.order('created_at DESC').all 
   end
-
+  
   # GET /users/new
   def new
     if logged_in?
@@ -112,4 +115,5 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
+    
 end

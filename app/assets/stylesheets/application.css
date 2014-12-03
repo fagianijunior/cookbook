@@ -15,7 +15,7 @@
  *= require_self
  */
 
-body { padding-top: 52px; }
+body { padding-top: 30px; }
 
 #avatar-current_user {
   position: absolute;

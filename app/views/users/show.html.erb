@@ -1,82 +1,72 @@
-<div id="wrapper">
-  <%= render 'sidebar' %>
-
-  <div id="page-content-wrapper">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <center>
-                <%= image_tag display_avatar(@user,"md"), class:"thumbnail", size:"200" %>
-              </center>
-              <%= render 'follow_form' %>
-            </div>
+<%= render 'sidebar' %>
+<br>
+<div class="row">
+  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+    <center>
+      <%= image_tag display_avatar(@user,"md"), class:"thumbnail img-responsive"%>
+    </center>
+    <%= render 'follow_form' %>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= simple_form_for(@post, url: posts_path, remote: true) do |f| %>
+          <div class="form-inputs">
+            <%= f.input :content, label: false, input_html: { class: "expand col-md-12 col-xs-12" }, placeholder: "Qual a delícia de hoje?", row: 1 %>
+            <%= f.association :type_post, input_html: { value: TypePost.find(1).id }, as: :hidden %>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-          <div class="panel panel-default">
-          <div class="panel-body">
-              <form>
-                <textarea class="expand col-md-12 col-xs-12" placeholder="Qual a delícia de hoje?" row=1></textarea>
-                <button class="btn btn-default btn-post" style="display: none">Limpar</button>
-                <button class="btn btn-default btn-post" style="display: none">Postar</button>
-              </form>
-            </div>
+          <div class="form-actions">
+            <%= f.button :submit, "Postar", class: "btn-default btn-post", style: "display: none" %>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <section class="stats">
-                <%= render 'shared/stats' %>
-            </section>
-            </div>
-            <div class="panel-body">
-              <% @user.following.limit(10).each do |following| %>
-                <div class="avatar-following pull-left">
-                  <%= link_to image_tag(display_avatar(following, "xs"), size: "40"), user_path(following.id) %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-	        <div class="panel panel-default">
-            <div class="panel-heading">
-              <img src="http://lorempixel.com/32/32/" /> Nome do usuário
-              <span class="pull-right">
-                <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                <a href="#" class="btn-close"><i class="glyphicon glyphicon-remove"></i></a>
-              </span>
-            </div>
-            <div class="panel-body">
-              <hr>
-            </div>
-            <div class="panel-footer">
-              <div class="media">
-    			      <a href="#" class="avatar-following pull-left pull-left"><img src="http://lorempixel.com/32/32/" class="media-object" alt='' /></a>
-		            <div class="media-body">
-			            <h4 class="media-heading">
-  					        Nested media heading
-				          </h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-				        </div>
-			        </div>
-              <div class="media">
-      			    <a href="#" class="avatar-following pull-left pull-left"><img src="http://lorempixel.com/32/32/" class="media-object" alt='' /></a>
-				        <div class="media-body">
-                  <h4 class="media-heading">
-					          Nested media heading
-  					      </h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-				        </div>
-			        </div>
-            </div>
-          </div>
-	      </div>
+        <% end %>
       </div>
     </div>
   </div>
-  <!-- /conteudo -->
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
+      </div>
+      <div class="panel-body">
+        <% @user.following.limit(10).each do |following| %>
+          <div class="avatar-following pull-left">
+            <%= link_to image_tag(display_avatar(following, "xs"), size: "40x40"), user_path(following.id) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+
+
+
+  <ul class="timeline">
+    <% @user.feed.each_with_index do |post, index| %>
+      <li class=<%= 'timeline-inverted' if index%2 == 0 %>>
+        <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="<%= post_date post.created_at %>" id=""></i></a></div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <span class="pull-right">
+              <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
+              <a href="#" class="btn-close"><i class="glyphicon glyphicon-remove"></i></a>
+            </span>
+            <%= link_to image_tag(display_avatar(post.user, "xs"), align: "left", class: "img-circle", size: "40"), post.user %>
+            &nbsp;<%= link_to "#{post.user.first_name} #{post.user.last_name}", post.user %><br>
+          </div>
+          <div class="timeline-body">
+            <p><%= post.content %></p>
+          </div>
+          <div class="timeline-footer">
+            <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
+            <a><i class="glyphicon glyphicon-share"></i></a>
+            <a class="pull-right">Continuar Lendo</a>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    <li class="clearfix" style="float: none;"></li>
+  </ul>
 </div>

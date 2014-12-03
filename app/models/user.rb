@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :post
+  
   belongs_to :gender
 
   #Regras
@@ -53,4 +55,10 @@ class User < ActiveRecord::Base
     self.update_column(:password_reset_sent_at, Time.zone.now)
     UserMailer.send_confirmation_mail(self).deliver
   end
+  
+  def feed
+    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+    Post.order('created_at DESC').where("user_id in (#{following_ids}) OR user_id = :user_id", user_id: id)
+  end
+  
 end
