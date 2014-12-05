@@ -10,14 +10,14 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       if user.email_confirmed?
         log_in user
-        redirect_to user
+        redirect_to current_user
       else
         flash.now[:danger] = 'Email não confirmado,<br />Verifique seu e-mail.'
-        render :new
+        redirect_to login_path
       end
     else
       flash.now[:danger] = "<h4>Ops!</h4>Email ou senha inválido."
-      render :new
+      redirect_to login_path
     end
   end
 

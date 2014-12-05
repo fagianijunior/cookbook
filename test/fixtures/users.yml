@@ -1,17 +1,33 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  password_digest: MyString
-  birth: 2014-10-14
-  gender_id: 
+  first_name: Carlos
+  last_name: Fagiani Junior
+  email: fagianijunior@gmail.com
+  password_digest: $2a$10$wtVfftNbopYXVm8NOt6OrOgXm9WCrImpRUNgoPV6vDhD198x6Pg2e
+  birth: 1985-10-28
+  gender_id: 1
 
 two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  password_digest: MyString
-  birth: 2014-10-14
-  gender_id: 
+  first_name: Marcelo
+  last_name: Aguiar
+  email: masasp29@gmail.com
+  password_digest: $2a$10$wtVfftNbopYXVm8NOt6OrOgXm9WCrImpRUNgoPV6vDhD198x6Pg2e
+  birth: 1987-02-24
+  gender_id: 1
+
+three:
+  first_name: Aleteia
+  last_name: Fagiani
+  email: aleteia@gmail.com
+  password_digest: $2a$10$wtVfftNbopYXVm8NOt6OrOgXm9WCrImpRUNgoPV6vDhD198x6Pg2e
+  birth: 1987-02-24
+  gender_id: 1
+
+four:
+  first_name: Leticia
+  last_name: Fagiani
+  email: leticia@gmail.com
+  password_digest: $2a$10$wtVfftNbopYXVm8NOt6OrOgXm9WCrImpRUNgoPV6vDhD198x6Pg2e
+  birth: 1987-02-24
+  gender_id: 1

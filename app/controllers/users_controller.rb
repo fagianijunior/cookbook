@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:    [:edit, :update, :index, :show]
+  before_action :logged_in_user, only:    [:index, :show, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only:    [:edit, :update]
   before_action :set_user, only:          [:edit, :update, :show, :destroy]
 
@@ -16,9 +16,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @post = Post.new
-    #@posts = feed(current_user)
-    #@posts = Post.order('created_at DESC').all 
+    @post = current_user.posts.build
+    @user = User.find(params[:id])
+    if current_user == @user
+      @posts = current_user.feed.paginate(page: params[:page]) 
+    else
+      @posts = @user.posts.paginate(page: params[:page])
+    end
   end
   
   # GET /users/new
@@ -33,7 +37,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
   end
-  
+
   def following
     @title = "Seguindo"
     @user  = User.find(params[:id])
@@ -102,13 +106,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :avatar, :email, :password, :password_confirmation, :birth, :gender_id)
-    end
-
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Porfavor loge-se."
-        redirect_to login_url
-      end
     end
 
     def correct_user

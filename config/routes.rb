@@ -1,23 +1,17 @@
 Rails.application.routes.draw do
-  
-  resources :posts
-
   resources :users do
     member do
       get :following, :followers
     end
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy, :index]
   resources :relationships, only: [:create, :destroy]
-
+  resources :posts, only: [:create, :destroy]
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-
-  #match '/signin', to: 'sessions#new', via: 'get'
-  #match '/signout', to: 'sessions#destroy', via: 'delete'
 
   get 'account_confirmation', to: 'users#account_confirmation'
 
