@@ -3,22 +3,17 @@
 <div class="row">
   <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
     <center>
-      <%= image_tag display_avatar(@user,"md"), class:"thumbnail img-responsive"%>
+    <div class="thumbnail">
+      <%= image_tag(display_avatar(@user,"md"), class:"img-responsive") %>
+      <h4><%= "#{@user.first_name} #{@user.last_name}" %></h4>
+    </div>
     </center>
     <%= render 'follow_form' %>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
     <div class="panel panel-default">
       <div class="panel-body">
-        <%= simple_form_for(@post, url: posts_path, remote: true) do |f| %>
-          <div class="form-inputs">
-            <%= f.input :content, label: false, input_html: { class: "expand col-md-12 col-xs-12" }, placeholder: "Qual a delícia de hoje?", row: 1 %>
-            <%= f.association :type_post, input_html: { value: TypePost.find(1).id }, as: :hidden %>
-          </div>
-          <div class="form-actions">
-            <%= f.button :submit, "Postar", class: "btn-default btn-post", style: "display: none" %>
-          </div>
-        <% end %>
+        <%= render 'posts/form' %>
       </div>
     </div>
   </div>
@@ -40,12 +35,8 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <hr>
-    <% if @user.posts.any? %>
-      <ul class="timeline" id="timeline">
-        <%= render @posts %>
-        <li class="clearfix" style="float: none;"></li>
-      </ul>
-      <%= will_paginate @posts %>
-    <% end %>
+    <div id="timeline">
+      <%= render 'posts/timeline' %>
+    </div>
   </div>
 </div>

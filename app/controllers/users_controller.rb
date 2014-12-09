@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     if params[:search].nil?
-      @users = User.paginate(page: params[:page])
+      @users = User.paginate(page: params[:page]).where.not(id: current_user.id)
     else
-      @users = User.where("lower(first_name) like ? or lower(last_name) like ?", "%#{params[:search][:q].downcase}%", "%#{params[:search][:q].downcase}%").paginate(page: params[:page])
+      @users = User.where("lower(first_name) like ? or lower(last_name) like ?", "%#{params[:search][:q].downcase}%", "%#{params[:search][:q].downcase}%").paginate(page: params[:page]).where.not(id: current_user.id)
     end
   end
 

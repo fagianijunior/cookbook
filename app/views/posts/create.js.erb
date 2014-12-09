@@ -1,1 +1,1 @@
-$("#timeline").html("<%= escape_javascript(render(following_user_path) ) %>")
+$("#timeline").html("<% @posts = current_user.feed.paginate(page: params[:page]) %>  <%= escape_javascript(render('timeline')) %>")

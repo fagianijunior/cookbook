@@ -10,7 +10,7 @@
       &nbsp;<%= link_to "#{post.user.first_name} #{post.user.last_name}", post.user %><br>
     </div>
     <div class="timeline-body">
-      <p><%= post.content %></p>
+      <%= post.content.html_safe %>
     </div>
     <div class="timeline-footer">
       <a><i class="glyphicon glyphicon-thumbs-up"></i></a>

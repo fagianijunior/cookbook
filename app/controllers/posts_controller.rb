@@ -8,11 +8,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     respond_to do |format|
       if @post.save
-        format.html { redirect_to current_user, notice: 'Post criado!' }
-        format.json { render :show, status: :created, location: @post }
+        format.js
       else
         #format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
