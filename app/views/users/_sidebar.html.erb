@@ -4,19 +4,19 @@
       <%= truncate("#{current_user.first_name} #{current_user.last_name}", length: 17) %>
     </li>
     <li>
-      <%= link_to "Home", current_user %>
+      <%= link_to "<i class='fa fa-home'> </i> Home".html_safe, current_user %>
     </li>
     <li>
-      <%= link_to "Editar profile", edit_user_path(current_user) %>
+      <%= link_to "<i class='fa fa-pencil-square-o'> </i> Editar profile".html_safe, edit_user_path(current_user) %>
     </li>
     <li>
-      <%= link_to "Meu Cookbook", "#" %>
+      <%= link_to "<i class='fa fa-book'> </i> Meu Cookbook".html_safe, "#" %>
     </li>
     <li>
-      <%= link_to "Encontrar Chiefs", users_path %>
+      <%= link_to "<i class='fa fa-users'> </i> Encontrar Chiefs".html_safe, users_path %>
     </li>
     <li>
-      <%= link_to "Sair", logout_path, method: :delete %>
+      <%= link_to "<i class='fa fa-power-off'> </i> Sair".html_safe, logout_path, method: :delete %>
     </li>
   </ul>
 </div>

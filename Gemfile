@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # ruby version
 ruby '2.1.3'
 
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap_glyphicons-rails'
+
 # Paginator
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
