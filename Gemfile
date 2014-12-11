@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # ruby version
-ruby '2.1.3'
+ruby '2.1.5'
 
 # Paginator
 gem 'will_paginate',           '3.0.7'
