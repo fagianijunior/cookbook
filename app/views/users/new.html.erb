@@ -1,6 +1,82 @@
 <div class="row">
   <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-    <%= render "form" %>
+    <%= simple_form_for(@user) do |f| %>
+    <%= f.error_notification %>
+    <h2>Torne-se um Chief <small>Mostre ao mundo o seu talento.</small></h2>
+    <hr class="colorgraph">
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+          <%= f.input :first_name, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Nome" %>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+          <%= f.input :last_name, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Sobrenome" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+          <%= f.input :email, label: false, input_html: { class: "form-control input-lg" }, placeholder: "E-mail" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+          <%= f.input :password, value: @first_password, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Senha" %>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+          <%= f.input :password_confirmation, label: false, input_html: { class: "form-control input-lg" }, placeholder: "Confirme a senha" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+          <%= f.input :birth, as: :date, label: "Data de nascimento", start_year: Date.today.year - 90, end_year: Date.today.year, input_html: { class: "form-inline input-lg" } %>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+          <%= f.input :avatar, label: "Foto", input_html: { class: "btn btn-default btn-lg" } %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+          <%= f.association :gender, label: false, prompt: "Sexo", input_html: { class: "form-control input-lg" } %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3">
+        <span class="button-checkbox">
+          <button type="button" class="btn" data-color="info" tabindex="7">Eu concordo</button>
+          <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
+        </span>
+      </div>
+      <div class="col-xs-9 col-sm-9 col-md-9">
+        Clicando em <strong class="label label-primary">Registrar</strong>, você concorda com os <a href="#" data-toggle="modal" data-target="#t_and_c_m">Termos e Condições</a> configurados para este site.
+      </div>
+    </div>
+    <hr class="colorgraph">
+    <div class="row">
+      <div class="col-xs-6 col-md-6">
+        <div class="form-actions">
+          <%= f.button :submit, value: "Registrar", class: "btn btn-primary btn-block btn-lg" %>
+        </div>
+      </div>
+      <div class="col-xs-6 col-md-6">
+        <%= link_to "Logar", new_session_path, class: "btn btn-success btn-block btn-lg" %>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>
 <!-- Modal -->
