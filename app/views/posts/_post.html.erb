@@ -1,10 +1,25 @@
 <li id="post-<%= post.id %>" class=<%= 'timeline-inverted' if post_counter%2 != 0 %>>
-  <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="<%= time_ago_in_words(post.created_at) %>" id=""></i></a></div>
+  <div class="timeline-badge primary"><a><i class="fa fa-dot-circle-o" rel="tooltip" title="<%= time_ago_in_words(post.created_at) %>" id=""></i></a></div>
   <div class="timeline-panel">
     <div class="timeline-heading">
       <span class="pull-right">
-        <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-        <a href="#" class="btn-close"><i class="glyphicon glyphicon-remove"></i></a>
+        <div class="btn-group">
+				  <a data-toggle="dropdown" class="dropdown-toggle"><span class="fa fa fa-chevron-down fa-lg"> </span> </a>
+				  <ul class="dropdown-menu">
+				    <% if post.user != current_user %>
+  					  <li>
+    						<a href="#">Denunciar</a>
+					    </li>
+					  <% else %>
+  					  <li>
+  						  <a href="#">Editar</a>
+					    </li>
+					    <li>
+  					    <a href='#'>Apagar</a>
+					    </li>
+            <% end %>
+				  </ul>
+			  </div>
       </span>
       <%= link_to image_tag(display_avatar(post.user, "xs"), align: "left", class: "img-circle", size: "40"), post.user %>
       &nbsp;<%= link_to "#{post.user.first_name} #{post.user.last_name}", post.user %><br>
@@ -13,8 +28,8 @@
       <%= post.content.html_safe %>
     </div>
     <div class="timeline-footer">
-      <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-      <a><i class="glyphicon glyphicon-share"></i></a>
+      <a><i class="fa fa-plus"></i></a>
+      <a><i class="fa fa-share-alt"></i></a>
       <a class="pull-right">Continuar Lendo</a>
     </div>
   </div>

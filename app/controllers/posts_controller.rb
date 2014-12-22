@@ -16,6 +16,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def delete_post
+    
+    @post.update_column(:email_confirmed, true)
+  end
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy

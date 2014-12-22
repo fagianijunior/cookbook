@@ -117,8 +117,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    turbolinks (2.4.0)
-      coffee-rails
+    tinymce-rails (4.1.6)
+      railties (>= 3.1.1)
     twitter-bootstrap-rails (3.2.0)
       actionpack (~> 4.1)
       execjs (~> 2.2)
@@ -151,7 +151,7 @@ DEPENDENCIES
   simple_form (~> 3.0.2)
   simple_form_fancy_uploads
   spring
-  turbolinks
+  tinymce-rails
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
   will_paginate (= 3.0.7)

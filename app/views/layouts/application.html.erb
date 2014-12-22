@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Rede social para quem gosta de culinário.">
     <meta name="author" content="Carlos Fagiani Junior">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <!-- %= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true % -->
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
@@ -55,7 +56,7 @@
     });
 
     $('textarea.expand').focusout(function () {
-      if ($(this).val().length > 0) { } else {
+      if ($(this).val().length === 0) {
         $(this).animate({ height: "25px" }, 500);
         $('.btn-post').hide(500);
       }

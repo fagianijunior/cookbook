@@ -1,0 +1,46 @@
+default:
+
+minimal:
+  selector : textarea.minimal
+  menubar : false
+  statusbar : false
+  formats : {
+    alignleft : {},
+    aligncenter : {},
+    alignright : {},
+    alignfull : {},
+    bold : {},
+    italic : {},
+    underline : {},
+    strikethrough : {},
+    forecolor : {},
+    hilitecolor : {},
+    custom_format : { styles : {color : red} }
+  }
+  
+  toolbar:
+    - image | link | media
+  plugins:
+    - image
+    - link
+    - media
+
+revenue:
+  selector: textarea.revenue
+  menubar : true
+  statusbar : false
+  templates: [ 
+    {title: 'Some title 1', description: 'Some desc 1', content: 'My content'}
+  ]
+  toolbar:
+    - template | styleselect | fontselect | bold italic | undo redo | searchreplace | image | link | preview | media | table | forecolor backcolor
+  plugins:
+    - visualblocks
+    - searchreplace
+    - preview
+    - image
+    - link
+    - media
+    - table
+    - textcolor
+    - template
