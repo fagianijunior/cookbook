@@ -30,7 +30,7 @@ revenue:
   menubar : true
   statusbar : false
   templates: [ 
-    {title: 'Some title 1', description: 'Some desc 1', content: 'My content'}
+    {title: 'Doce', description: 'Doce', content: '<br><br>My content'}
   ]
   toolbar:
     - template | styleselect | fontselect | bold italic | undo redo | searchreplace | image | link | preview | media | table | forecolor backcolor

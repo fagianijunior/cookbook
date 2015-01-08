@@ -3,18 +3,24 @@
 			<div class="tabbable" id="tabs-697335">
 				<ul class="nav nav-tabs">
 					<li class="active">
-						<a href="#panel-467808" data-toggle="tab">Texto</a>
+						<a href="#panel-1" data-toggle="tab">Texto</a>
 					</li>
 					<li>
-						<a href="#panel-376113" data-toggle="tab">Receita</a>
+						<a href="#panel-2" data-toggle="tab">Receita</a>
+					</li>
+					<li>
+						<a href="#panel-3" data-toggle="tab">Receita</a>
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active" id="panel-467808">
+					<div class="tab-pane active" id="panel-1">
 						<%= render "posts/form_simple" %>
 					</div>
-					<div class="tab-pane" id="panel-376113">
-							<%= render "posts/form_rich" %>
+					<div class="tab-pane" id="panel-2">
+						<%= render "posts/form_rich" %>
+					</div>
+					<div class="tab-pane" id="panel-3">
+						<%= render "posts/form_revenue" %>
 					</div>
 				</div>
 			</div>

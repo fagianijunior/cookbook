@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # ruby version
-ruby '2.1.5'
+ruby '2.1.3'
 
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap_glyphicons-rails'
@@ -27,6 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Forms made easy!
 gem 'simple_form', '~> 3.0.2'
+gem 'simple_form_fancy_uploads'
 
 # Adiciona suporte a pre-visualizacao ao simple_form
 gem 'simple_form_fancy_uploads'
